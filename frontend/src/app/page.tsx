@@ -9,7 +9,7 @@ export default async function Home() {
   // Dohvaća posljednji objavljeni "hero" dokument
   const heroData = await client.fetch(`*[_type == "hero"][0]`, {}, { next: { revalidate: 30 } });
   
-  // Dohvaća sve igre iz baze
+  // Dohvaća se igre iz baze...
   const gamesData = await client.fetch(`*[_type == "game"] | order(_createdAt asc)`, {}, { next: { revalidate: 30 } });
 
   return (
