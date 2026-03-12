@@ -1,0 +1,43 @@
+import { NextResponse } from "next/server";
+import { client } from "../../../sanity/client"; // putanja od src/app/api/reserve/route.ts -> src/sanity/client
+
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
+    const { date, time, seats, name, phone } = body;
+
+    if (!date || !time || !name || !phone || !seats) {
+      return NextResponse.json(
+        { message: "Sva polja su obavezna" },
+        { status: 400 },
+      );
+    }
+
+    // Ovdje provjeravamo postoji li token za pisanje u Sanity
+    // BILO BI DOBRO POSTAVITI 'SANITY_API_TOKEN' U .env.local!
+
+    const doc = {
+      _type: "reservation",
+      name,
+      phone,
+      date,
+      timeSlot: time,
+      seats: Number(seats),
+      status: "pending",
+    };
+
+    // Stvori dokument u Sanity-u
+    await client.create(doc);
+
+    return NextResponse.json(
+      { message: "Uspješno spremljeno", success: true },
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error("Greška kod spremanja rezervacije:", error);
+    return NextResponse.json(
+      { message: "Interna greška servera" },
+      { status: 500 },
+    );
+  }
+}
