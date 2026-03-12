@@ -1,0 +1,70 @@
+export default {
+  name: 'reservation',
+  title: 'Narudžbe (Rezervacije)',
+  type: 'document',
+  fields: [
+    {
+      name: 'name',
+      title: 'Ime prezime / Ime igrača',
+      type: 'string',
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'phone',
+      title: 'Broj telefona',
+      type: 'string',
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'date',
+      title: 'Datum',
+      type: 'date',
+      options: {
+        dateFormat: 'YYYY-MM-DD',
+      },
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'timeSlot',
+      title: 'Vrijeme (sat)',
+      type: 'string',
+      description: 'Npr. 12:00, 16:00',
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'seats',
+      title: 'Količina mjesta (Broj računala/konzola)',
+      type: 'number',
+      validation: (Rule: any) => Rule.required().min(1).max(10),
+    },
+    {
+      name: 'status',
+      title: 'Status',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Na čekanju', value: 'pending'},
+          {title: 'Potvrđeno', value: 'confirmed'},
+          {title: 'Otkazano', value: 'cancelled'},
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'pending',
+    },
+  ],
+  preview: {
+    select: {
+      title: 'name',
+      date: 'date',
+      timeSlot: 'timeSlot',
+      seats: 'seats',
+    },
+    prepare(selection: any) {
+      const {title, date, timeSlot, seats} = selection
+      return {
+        title: `${title} (${seats} mjesta)`,
+        subtitle: `${date} u ${timeSlot}`,
+      }
+    },
+  },
+}
