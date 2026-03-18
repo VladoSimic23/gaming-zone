@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -12,21 +12,21 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { name: 'Status računala', href: '#status' },
-    { name: 'Rezervacije', href: '#rezervacije' },
-    { name: 'Popis igara', href: '#igre' },
-    { name: 'Turniri', href: '#turniri' },
-    { name: 'Cjenik', href: '#cjenik' },
+    { name: "Novosti", href: "/novosti" },
+    { name: "Turniri", href: "/turniri" },
   ];
 
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
     // Ako link vodi na hash unutar iste stranice (npr. #status), dodajemo smooth scroll
-    if (href.startsWith('#')) {
+    if (href.startsWith("#")) {
       e.preventDefault();
       setIsMobileMenuOpen(false);
       const element = document.querySelector(href);
@@ -34,7 +34,7 @@ export default function Navbar() {
         // Dodajemo mali offset zbog fixed navbar-a
         window.scrollTo({
           top: element.getBoundingClientRect().top + window.scrollY - 80,
-          behavior: 'smooth'
+          behavior: "smooth",
         });
       }
     }
@@ -44,27 +44,39 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#0a0a0a]/90 backdrop-blur-md border-b border-cyan-500/20 py-2 shadow-[0_4px_20px_rgba(0,255,255,0.1)]'
-          : 'bg-transparent py-4'
+          ? "bg-[#0a0a0a]/90 backdrop-blur-md border-b border-cyan-500/20 py-2 shadow-[0_4px_20px_rgba(0,255,255,0.1)]"
+          : "bg-transparent py-4"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <Link
+          href="/"
+          className="flex items-center gap-3 group"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
           <div className="relative w-12 h-12 md:w-16 md:h-16 transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_10px_rgba(34,211,238,0.8)]">
             {/* Ovdje direktno učitavamo sliku iz public foldera ili odakle god Next.js može uzeti */}
-            <Image src="/logo.png" alt="ggZone Logo" fill className="object-contain rounded-full" />
+            <Image
+              src="/logo.png"
+              alt="ggZone Logo"
+              fill
+              className="object-contain rounded-full"
+            />
           </div>
           <span
             className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600 hidden sm:block"
-            style={{ fontFamily: 'var(--font-orbitron, sans-serif)' }}
+            style={{ fontFamily: "var(--font-orbitron, sans-serif)" }}
           >
             ggZone
           </span>
         </Link>
 
         {/* Desktop Menu */}
-        <ul className="hidden lg:flex gap-8 items-center" style={{ fontFamily: 'var(--font-chakra, sans-serif)' }}>
+        <ul
+          className="hidden lg:flex gap-8 items-center"
+          style={{ fontFamily: "var(--font-chakra, sans-serif)" }}
+        >
           {navLinks.map((link) => (
             <li key={link.name}>
               <Link
@@ -76,6 +88,24 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
+          {/* Instagram Icon */}
+          <li className="ml-4 border-l border-gray-700 pl-8">
+            <a
+              href="https://www.instagram.com/gg.grude/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-fuchsia-500 transition-all duration-300 flex items-center group"
+            >
+              <svg
+                className="w-8 h-8 group-hover:scale-110 group-hover:drop-shadow-[0_0_12px_rgba(217,70,239,0.8)] transition-all duration-300"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+              </svg>
+            </a>
+          </li>
         </ul>
 
         {/* Mobile Menu Button - Hamburger */}
@@ -83,11 +113,26 @@ export default function Navbar() {
           className="lg:hidden text-cyan-400 p-2 focus:outline-none"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg
+            className="w-8 h-8"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
             {isMobileMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             )}
           </svg>
         </button>
@@ -96,9 +141,15 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 right-0 bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-cyan-500/20 shadow-[0_10px_30px_rgba(0,0,0,0.8)] overflow-hidden">
-          <ul className="flex flex-col py-6" style={{ fontFamily: 'var(--font-chakra, sans-serif)' }}>
+          <ul
+            className="flex flex-col py-6"
+            style={{ fontFamily: "var(--font-chakra, sans-serif)" }}
+          >
             {navLinks.map((link) => (
-              <li key={link.name} className="px-6 py-3 border-b border-gray-800/50 last:border-0 hover:bg-white/5 transition-colors">
+              <li
+                key={link.name}
+                className="px-6 py-3 border-b border-gray-800/50 last:border-0 hover:bg-white/5 transition-colors"
+              >
                 <Link
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link.href)}
@@ -108,6 +159,24 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
+            <li className="px-6 py-4 hover:bg-white/5 transition-colors flex justify-left mt-2">
+              <a
+                href="https://www.instagram.com/gg.grude/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-gray-300 text-xl font-semibold hover:text-fuchsia-500 transition-colors"
+              >
+                <svg
+                  className="w-8 h-8"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                </svg>
+                <span>Instagram</span>
+              </a>
+            </li>
           </ul>
         </div>
       )}

@@ -2,45 +2,108 @@ import ReservationForm from "../components/ReservationForm";
 import HeroSlideshow from "../components/HeroSlideshow";
 import LiveSeatStatus from "../components/LiveSeatStatus";
 import GamesList from "../components/GamesList";
+import PlaystationGamesList from "../components/PlaystationGamesList";
+import TournamentsList from "../components/TournamentsList";
+import WorkingHours from "../components/WorkingHours";
+import Pricing from "../components/Pricing";
+import NewsSection from "../components/NewsSection";
+import HomeSidebar from "../components/HomeSidebar";
 import { client } from "../sanity/client";
 
 // Obzirom da je ovo Server Component, možemo direktno dohvatiti podatke prije rendera
 export default async function Home() {
   // Dohvaća posljednji objavljeni "hero" dokument
-  const heroData = await client.fetch(`*[_type == "hero"][0]`, {}, { next: { revalidate: 30 } });
-  
+  const heroData = await client.fetch(
+    `*[_type == "hero"][0]`,
+    {},
+    { next: { revalidate: 30 } },
+  );
+
   // Dohvaća se igre iz baze...
-  const gamesData = await client.fetch(`*[_type == "game"] | order(_createdAt asc)`, {}, { next: { revalidate: 30 } });
+  const gamesData = await client.fetch(
+    `*[_type == "game"] | order(_createdAt asc)`,
+    {},
+    { next: { revalidate: 30 } },
+  );
+
+  // Dohvaća se PlayStation igre iz baze...
+  const psGamesData = await client.fetch(
+    `*[_type == "playstationGame"] | order(_createdAt asc)`,
+    {},
+    { next: { revalidate: 30 } },
+  );
+
+  // Dohvaća turnire (zadnja 3 objavljena)
+  const tournamentsData = await client.fetch(
+    `*[_type == "tournament"] | order(_createdAt desc)[0...3]`,
+    {},
+    { next: { revalidate: 30 } },
+  );
+
+  // Dohvaća novosti (zadnje 3 objavljene)
+  const newsData = await client.fetch(
+    `*[_type == "news"] | order(publishedAt desc)[0...3]`,
+    {},
+    { next: { revalidate: 30 } },
+  );
+
+  // Dohvaća postavljeno radno vrijeme
+  const workingHoursData = await client.fetch(
+    `*[_type == "workingHours"][0]`,
+    {},
+    { next: { revalidate: 30 } },
+  );
+
+  // Dohvaća cjenik
+  const pricingData = await client.fetch(
+    `*[_type == "prices"][0]`,
+    {},
+    { next: { revalidate: 30 } },
+  );
 
   return (
-    <main className="min-h-screen bg-[#111] text-white font-sans">
+    <main className="min-h-screen bg-[#111] text-white font-sans relative">
+      <HomeSidebar />
       <HeroSlideshow data={heroData} />
-      
-      <div className="max-w-6xl mx-auto p-4 md:p-8 space-y-16">
+
+      {/* Sekcija za novosti na punoj širini iznad glavnog wrappera */}
+      <section id="novosti" className="w-full relative z-10">
+        <NewsSection news={newsData} />
+      </section>
+
+      <div className="max-w-6xl mx-auto p-4 md:p-8 space-y-16 relative z-10">
         <section id="status" className="scroll-mt-24">
           <LiveSeatStatus />
         </section>
-        
+
         <section id="rezervacije" className="scroll-mt-24">
           <ReservationForm />
         </section>
 
         {/* Prikaz dohvaćenih igara */}
-        <section id="igre" className="scroll-mt-24">
+        <section id="igre" className="scroll-mt-24 flex flex-col gap-12">
           <GamesList games={gamesData} />
-        </section>
 
-        {/* Placeholders za buduće sekcije */}
-        <section id="turniri" className="scroll-mt-24 bg-[#1a1a1a]/80 backdrop-blur-sm border border-gray-800 rounded-2xl p-12 text-center shadow-[0_0_30px_rgba(0,0,0,0.8)]">
-          <h2 className="text-3xl font-bold text-gray-400 mb-4" style={{ fontFamily: 'var(--font-orbitron, sans-serif)' }}>Turniri</h2>
-          <p className="text-gray-500" style={{ fontFamily: 'var(--font-chakra, sans-serif)' }}>Ova sekcija će biti implementirana kasnije.</p>
-        </section>
-
-        <section id="cjenik" className="scroll-mt-24 bg-[#1a1a1a]/80 backdrop-blur-sm border border-gray-800 rounded-2xl p-12 text-center shadow-[0_0_30px_rgba(0,0,0,0.8)] mb-24">
-          <h2 className="text-3xl font-bold text-gray-400 mb-4" style={{ fontFamily: 'var(--font-orbitron, sans-serif)' }}>Cjenik</h2>
-          <p className="text-gray-500" style={{ fontFamily: 'var(--font-chakra, sans-serif)' }}>Ova sekcija će biti implementirana kasnije.</p>
+          <PlaystationGamesList games={psGamesData} />
         </section>
       </div>
+
+      {/* Sekcija za turnire */}
+      <section id="turniri" className="w-full relative z-10">
+        <TournamentsList tournaments={tournamentsData} />
+      </section>
+
+      <div className="max-w-6xl mx-auto p-4 md:p-8 space-y-16 relative z-10">
+        {/* Sekcija za radno vrijeme */}
+        <section id="radno-vrijeme" className="scroll-mt-24 pb-12">
+          <WorkingHours data={workingHoursData} />
+        </section>
+      </div>
+
+      {/* Sekcija za cjenik */}
+      <section id="cjenik" className="w-full relative z-10">
+        <Pricing data={pricingData} />
+      </section>
     </main>
   );
 }

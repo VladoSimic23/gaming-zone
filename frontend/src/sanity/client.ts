@@ -1,5 +1,5 @@
 import { createClient } from "next-sanity";
-import imageUrlBuilder from "@sanity/image-url";
+import { createImageUrlBuilder } from "@sanity/image-url";
 
 export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "f3uz2b9v", // pravi Project ID iz backenda
@@ -10,7 +10,7 @@ export const client = createClient({
 });
 
 // Helper za dohvaćanje slika iz Sanityja
-const builder = imageUrlBuilder(client);
+const builder = createImageUrlBuilder(client);
 
 type SanityImageSource = Parameters<typeof builder.image>[0];
 
