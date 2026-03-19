@@ -67,8 +67,8 @@ export default function Pricing({ data }: { data: any }) {
               >
                 {data.pcPricing.perHour && (
                   <div className="flex justify-between items-center bg-[#05080f] p-5 rounded-xl border border-blue-900/40">
-                    <span className="text-lg text-gray-300 uppercase tracking-widest font-semibold">Cijena po satu</span>
-                    <span className="text-3xl font-bold text-blue-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]">
+                    <span className="text-base md:text-lg text-gray-300 uppercase tracking-widest font-semibold">Cijena po satu</span>
+                    <span className="text-2xl md:text-3xl font-bold text-blue-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]">
                       {formatPrice(data.pcPricing.perHour)}
                     </span>
                   </div>
@@ -85,8 +85,8 @@ export default function Pricing({ data }: { data: any }) {
                           key={idx}
                           className="flex justify-between items-center border-b border-blue-900/20 border-dashed pb-3 last:border-0 hover:bg-blue-500/5 p-2 rounded transition-colors"
                         >
-                          <span className="text-gray-300 font-medium">{pkg.name}</span>
-                          <span className="font-bold text-white tracking-wider">
+                          <span className="text-sm md:text-base text-gray-300 font-medium">{pkg.name}</span>
+                          <span className="text-sm md:text-base font-bold text-white tracking-wider">
                             {formatPrice(pkg.price)}
                           </span>
                         </div>
@@ -134,8 +134,8 @@ export default function Pricing({ data }: { data: any }) {
               >
                 {data.psPricing.perHour && (
                   <div className="flex justify-between items-center bg-[#07040a] p-5 rounded-xl border border-purple-900/40">
-                    <span className="text-lg text-gray-300 uppercase tracking-widest font-semibold">Cijena po satu</span>
-                    <span className="text-3xl font-bold text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]">
+                    <span className="text-base md:text-lg text-gray-300 uppercase tracking-widest font-semibold">Cijena po satu</span>
+                    <span className="text-2xl md:text-3xl font-bold text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]">
                       {formatPrice(data.psPricing.perHour)}
                     </span>
                   </div>
@@ -152,8 +152,8 @@ export default function Pricing({ data }: { data: any }) {
                           key={idx}
                           className="flex justify-between items-center border-b border-purple-900/20 border-dashed pb-3 last:border-0 hover:bg-purple-500/5 p-2 rounded transition-colors"
                         >
-                          <span className="text-gray-300 font-medium">{pkg.name}</span>
-                          <span className="font-bold text-white tracking-wider">
+                          <span className="text-sm md:text-base text-gray-300 font-medium">{pkg.name}</span>
+                          <span className="text-sm md:text-base font-bold text-white tracking-wider">
                             {formatPrice(pkg.price)}
                           </span>
                         </div>
@@ -203,10 +203,10 @@ export default function Pricing({ data }: { data: any }) {
                     key={idx}
                     className="flex justify-between items-center border-b border-emerald-900/20 pb-2 group"
                   >
-                    <span className="text-gray-400 text-sm md:text-base group-hover:text-gray-200 transition-colors">
+                    <span className="text-gray-400 text-base md:text-base group-hover:text-gray-200 transition-colors">
                       {drink.name}
                     </span>
-                    <span className="font-bold text-emerald-400">
+                    <span className="text-base md:text-base font-bold text-emerald-400">
                       {formatPrice(drink.price)}
                     </span>
                   </div>
@@ -252,10 +252,10 @@ export default function Pricing({ data }: { data: any }) {
                     key={idx}
                     className="flex justify-between items-center border-b border-yellow-900/20 pb-2 group"
                   >
-                    <span className="text-gray-400 text-sm md:text-base group-hover:text-gray-200 transition-colors">
+                    <span className="text-gray-400 text-base md:text-base group-hover:text-gray-200 transition-colors">
                       {snack.name}
                     </span>
-                    <span className="font-bold text-yellow-400">
+                    <span className="text-base md:text-base font-bold text-yellow-400">
                       {formatPrice(snack.price)}
                     </span>
                   </div>
