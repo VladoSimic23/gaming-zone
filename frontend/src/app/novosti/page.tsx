@@ -11,7 +11,7 @@ export default async function NovostiPage() {
   );
 
   return (
-    <main className="min-h-screen bg-[#111] text-white font-sans py-24 px-4 md:px-8">
+    <main className="min-h-screen bg-[#111] text-white font-sans mt-12 py-24 px-4 md:px-8">
       <div className="max-w-6xl mx-auto space-y-12">
         <div className="text-center space-y-4">
           <h1

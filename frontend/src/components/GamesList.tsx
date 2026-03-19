@@ -41,7 +41,7 @@ export default function GamesList({ games }: GamesListProps) {
           className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-500 to-pink-500 tracking-widest text-center"
           style={{ fontFamily: "var(--font-orbitron, sans-serif)" }}
         >
-          DOSTUPNE IGRE
+          PC IGRE
         </h2>
         <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mt-4 rounded-full shadow-[0_0_10px_rgba(217,70,239,0.8)]"></div>
         <p

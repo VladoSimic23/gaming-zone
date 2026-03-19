@@ -71,13 +71,18 @@ export default async function Home() {
         <NewsSection news={newsData} />
       </section>
 
-      <div className="max-w-6xl mx-auto p-4 md:p-8 space-y-16 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 md:px-8 py-16 md:py-24 space-y-16 md:space-y-24 relative z-10">
         <section id="status" className="scroll-mt-24">
           <LiveSeatStatus />
         </section>
 
         <section id="rezervacije" className="scroll-mt-24">
           <ReservationForm />
+        </section>
+
+        {/* Sekcija za radno vrijeme */}
+        <section id="radno-vrijeme" className="scroll-mt-24">
+          <WorkingHours data={workingHoursData} />
         </section>
 
         {/* Prikaz dohvaćenih igara */}
@@ -92,13 +97,6 @@ export default async function Home() {
       <section id="turniri" className="w-full relative z-10">
         <TournamentsList tournaments={tournamentsData} />
       </section>
-
-      <div className="max-w-6xl mx-auto p-4 md:p-8 space-y-16 relative z-10">
-        {/* Sekcija za radno vrijeme */}
-        <section id="radno-vrijeme" className="scroll-mt-24 pb-12">
-          <WorkingHours data={workingHoursData} />
-        </section>
-      </div>
 
       {/* Sekcija za cjenik */}
       <section id="cjenik" className="w-full relative z-10">

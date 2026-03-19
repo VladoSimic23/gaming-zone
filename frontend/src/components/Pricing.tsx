@@ -9,7 +9,7 @@ export default function Pricing({ data }: { data: any }) {
   };
 
   return (
-    <div className="w-full relative py-24 bg-gradient-to-b from-[#050505] via-[#081210] to-[#050505] overflow-hidden drop-shadow-xl mt-4">
+    <div className="w-full relative py-24 bg-gradient-to-b from-[#050505] via-[#081210] to-[#050505] overflow-hidden drop-shadow-xl ">
       {/* Background glow effects - Emerald/Blue aesthetic for Pricing */}
       <div className="absolute top-0 left-1/4 w-[35rem] h-[35rem] bg-emerald-600/10 rounded-full filter blur-[140px] opacity-50 pointer-events-none"></div>
       <div className="absolute bottom-0 right-1/4 w-[35rem] h-[35rem] bg-blue-600/10 rounded-full filter blur-[140px] opacity-40 pointer-events-none"></div>

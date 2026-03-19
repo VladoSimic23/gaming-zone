@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Orbitron, Chakra_Petch } from "next/font/google";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import "./globals.css";
 
 const orbitron = Orbitron({
@@ -27,10 +28,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${chakraPetch.variable} ${orbitron.variable} antialiased`}>
+      <body
+        className={`${chakraPetch.variable} ${orbitron.variable} antialiased`}
+      >
         <Navbar />
-        {children}
+        <main className="min-h-screen">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
 }
+

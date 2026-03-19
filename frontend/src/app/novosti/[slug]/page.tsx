@@ -108,7 +108,7 @@ export default async function NewsDetailPage({
   }
 
   return (
-    <main className="min-h-screen bg-[#111] text-white font-sans pb-24">
+    <main className="min-h-screen bg-[#111] text-white font-sans pb-24 mt-12">
       {/* Hero sekcija vijesti */}
       <div className="relative w-full h-[40vh] md:h-[50vh] bg-black border-b border-blue-500/30">
         {newsItem.mainImage ? (

@@ -132,7 +132,7 @@ export default async function TournamentDetailPage({
           <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-[#111]"></div>
         )}
 
-        <div className="absolute bottom-0 left-0 w-full p-6 md:p-12 max-w-4xl mx-auto md:left-1/2 md:-translate-x-1/2 flex flex-col items-start">
+        <div className="absolute bottom-0 left-0 w-full p-6 md:p-12 max-w-4xl mx-auto md:left-1/2 md:-translate-x-1/2 flex flex-col items-start mt-12">
           <Link
             href="/turniri"
             className="inline-flex items-center text-red-500 hover:text-red-400 mb-8 font-bold uppercase tracking-wider text-sm transition-colors"
