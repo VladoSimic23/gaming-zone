@@ -1,9 +1,61 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { Metadata } from "next";
 import { client, urlFor } from "@/sanity/client";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+
+  const tournamentItem = await client.fetch(
+    `*[_type == "tournament" && slug.current == $slug][0]`,
+    { slug },
+  );
+
+  if (!tournamentItem) {
+    return {
+      title: "Turnir nije pronađen | ggZone",
+      description: "Traženi turnir ne postoji.",
+    };
+  }
+
+  const title = `${tournamentItem.title} turnir | ggZone`;
+  const description = `Prijavi se i saznaj sve detalje o "${tournamentItem.title}" turniru u ggZone igraonici. Otvorene prijave i pravila natjecanja!`;
+  const imageUrl = tournamentItem.mainImage
+    ? urlFor(tournamentItem.mainImage).width(1200).height(630).url()
+    : "/images/og-image.jpg";
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `http://www.gggamingzone.com/turniri/${slug}`,
+      type: "article",
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: tournamentItem.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [imageUrl],
+    },
+  };
+}
 
 // Prilagođene komponente za PortableText kako bismo ga stilizirali
 const ptComponents = {
@@ -12,15 +64,25 @@ const ptComponents = {
       if (!value?.asset?._ref) {
         return null;
       }
+
+      // Izvuci prirodne dimenzije slike iz Sanity _ref stringa (npr. image-abc-800x600-png) kako bismo izbjegli layout shift
+      let imgWidth = 1600;
+      let imgHeight = 900;
+      const refMatch = value.asset._ref.match(/-(\d+)x(\d+)-/);
+      if (refMatch) {
+        imgWidth = parseInt(refMatch[1], 10);
+        imgHeight = parseInt(refMatch[2], 10);
+      }
+
       return (
-        <div className="relative w-full max-w-3xl mx-auto my-8 aspect-video rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+        <div className="relative w-full my-10 md:my-14 rounded-none md:rounded-2xl overflow-hidden border-y md:border border-gray-800 shadow-2xl flex justify-center bg-[#111]">
           <Image
-            src={urlFor(value).width(1200).url()}
+            src={urlFor(value).width(1600).url()}
             alt={value.alt || "Slika u tekstu"}
-            fill
-            className="object-contain bg-black/50"
-            priority
-            fetchPriority="high"
+            width={imgWidth}
+            height={imgHeight}
+            className="w-full h-auto object-contain"
+            sizes="(max-width: 768px) 100vw, 1600px"
           />
           {value.caption && (
             <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-3 text-center text-sm text-gray-300">
