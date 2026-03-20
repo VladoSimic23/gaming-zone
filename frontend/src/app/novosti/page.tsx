@@ -1,7 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { Metadata } from "next";
 import { client, urlFor } from "@/sanity/client";
 import Link from "next/link";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Novosti",
+  description:
+    "Pratite najnovije obavijesti, događanja i promjene u našoj ggZone igraonici.",
+  alternates: {
+    canonical: "/novosti",
+  },
+};
 
 export default async function NovostiPage() {
   const news = await client.fetch(

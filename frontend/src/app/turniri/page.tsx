@@ -1,7 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { Metadata } from "next";
 import { client, urlFor } from "@/sanity/client";
 import Link from "next/link";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Turniri",
+  description:
+    "Pregled svih nadolazećih, trenutnih i prethodnih turnira u našoj igraonici. Prijavi se i pokaži tko je najbolji!",
+  alternates: {
+    canonical: "/turniri",
+  },
+};
 
 export default async function TurniriPage() {
   const tournaments = await client.fetch(

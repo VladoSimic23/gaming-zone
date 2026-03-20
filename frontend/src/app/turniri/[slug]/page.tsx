@@ -34,6 +34,9 @@ export async function generateMetadata({
   return {
     title,
     description,
+    alternates: {
+      canonical: `/turniri/${slug}`,
+    },
     openGraph: {
       title,
       description,

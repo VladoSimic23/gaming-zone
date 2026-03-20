@@ -34,6 +34,9 @@ export async function generateMetadata({
   return {
     title,
     description,
+    alternates: {
+      canonical: `/novosti/${slug}`,
+    },
     openGraph: {
       title,
       description,
