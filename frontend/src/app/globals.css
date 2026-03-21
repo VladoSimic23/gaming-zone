@@ -17,3 +17,56 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
+
+@keyframes letterDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.8) rotate(-10deg);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+    filter: blur(0);
+  }
+}
+
+.animate-letter {
+  display: inline-block;
+  opacity: 0; /* Ostaje nevidljivo dok ne krene animacija */
+  /* forwards znaci da zadrzi stanje iz 100% (opacity: 1) kada animacija zavrsi */
+  animation: letterDrop 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
+}
+
+@keyframes sidebarEnter {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-sidebar {
+  animation: sidebarEnter 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

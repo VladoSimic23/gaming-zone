@@ -215,7 +215,7 @@ export default function HomeSidebar() {
     <>
       {/* DESKTOP SIDEBAR */}
       <div
-        className={`hidden md:flex fixed top-1/2 -translate-y-1/2 left-0 z-40 transition-all duration-500 ease-in-out ${
+        className={`hidden md:flex fixed top-1/2 -translate-y-1/2 left-0 z-40 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] animate-sidebar ${
           isCollapsed ? "-translate-x-[calc(100%-2rem)]" : "translate-x-0"
         }`}
       >

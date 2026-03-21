@@ -66,13 +66,21 @@ export default function TournamentsList({
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {tournaments.slice(0, 3).map((tournament) => (
+        <div className="flex flex-row overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 pb-8 -mx-4 px-4 md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          {tournaments.slice(0, 3).map((tournament, index) => (
             <Link
               key={tournament._id}
               href={`/turniri/${tournament.slug.current}`}
-              className="group block relative rounded-2xl overflow-hidden bg-[#0d0d0d] shadow-lg hover:shadow-[0_0_30px_rgba(239,68,68,0.2)] transition-all duration-500 hover:-translate-y-2 flex flex-col h-[420px] border border-white/5 hover:border-red-500/40"
+              className="group block relative rounded-2xl overflow-hidden bg-[#0d0d0d] shadow-lg hover:shadow-[0_0_30px_rgba(239,68,68,0.2)] transition-all duration-500 hover:-translate-y-2 flex-shrink-0 w-[85vw] md:w-auto flex flex-col h-[420px] border border-white/5 hover:border-red-500/40 snap-center"
             >
+              {/* Oznaka rednog broja (Cool broj) */}
+              <div
+                className="absolute top-4 left-4 z-20 flex items-center justify-center w-12 h-12 rounded-xl bg-[#0d0d0d]/80 backdrop-blur-md border border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.4)] text-transparent bg-clip-text bg-gradient-to-br from-red-400 to-orange-600 font-black text-2xl"
+                style={{ fontFamily: "var(--font-orbitron, sans-serif)" }}
+              >
+                {index + 1}
+              </div>
+
               <div className="h-[220px] w-full relative overflow-hidden flex-shrink-0">
                 {tournament.mainImage ? (
                   <Image
