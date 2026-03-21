@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { urlFor } from "../sanity/client";
 
 interface HeroData {
@@ -55,11 +56,12 @@ export default function HeroSlideshow({ data }: { data: HeroData | null }) {
             index === currentIndex ? "opacity-100" : "opacity-0"
           }`}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={urlFor(img).width(1920).height(1080).url()}
             alt={`Hero BG ${index}`}
-            fetchPriority="high"
+            width={1920}
+            height={1080}
+            priority={index === 0}
             className="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-[10000ms]"
           />
         </div>
