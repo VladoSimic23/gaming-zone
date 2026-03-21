@@ -11,6 +11,7 @@ export default function Footer() {
         <div className="flex flex-col items-center text-center">
           <Link
             href="/"
+            aria-label="Početna"
             className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 font-[var(--font-orbitron)] tracking-wider"
           >
             <span

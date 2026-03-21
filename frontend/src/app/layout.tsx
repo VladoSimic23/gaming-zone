@@ -17,10 +17,8 @@ const chakraPetch = Chakra_Petch({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#111111",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
 };
 
 export const metadata: Metadata = {

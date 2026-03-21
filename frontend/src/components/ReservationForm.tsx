@@ -203,10 +203,14 @@ export default function ReservationForm() {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-1">
+          <label
+            htmlFor="reservationDate"
+            className="block text-sm font-medium text-gray-300 mb-1"
+          >
             Datum dolaska
           </label>
           <input
+            id="reservationDate"
             type="date"
             required
             min={new Date().toISOString().split("T")[0]}
@@ -262,10 +266,14 @@ export default function ReservationForm() {
 
         {selectedTimes.length > 0 && (
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">
+            <label
+              htmlFor="seatCount"
+              className="block text-sm font-medium text-gray-300 mb-1"
+            >
               Koliko računala/konzola?
             </label>
             <select
+              id="seatCount"
               value={seats}
               onChange={(e) => setSeats(Number(e.target.value))}
               className="w-full bg-[#222] border border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-purple-500 outline-none"
@@ -289,10 +297,14 @@ export default function ReservationForm() {
         {selectedTimes.length > 0 && (
           <>
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1">
+              <label
+                htmlFor="customerName"
+                className="block text-sm font-medium text-gray-300 mb-1"
+              >
                 Ime
               </label>
               <input
+                id="customerName"
                 type="text"
                 required
                 value={name}
@@ -302,10 +314,14 @@ export default function ReservationForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1">
+              <label
+                htmlFor="customerPhone"
+                className="block text-sm font-medium text-gray-300 mb-1"
+              >
                 Broj telefona
               </label>
               <input
+                id="customerPhone"
                 type="tel"
                 required
                 value={phone}

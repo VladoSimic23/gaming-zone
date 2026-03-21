@@ -254,6 +254,7 @@ export default function HomeSidebar() {
 
           {/* Toggle Button for Desktop */}
           <button
+            aria-label={isCollapsed ? "Proširi sidebar" : "Skupi sidebar"}
             onClick={() => setIsCollapsed(!isCollapsed)}
             className="absolute top-1/2 -translate-y-1/2 right-0 translate-x-1/2 bg-[#1a1a1a] border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 hover:shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:text-cyan-300 w-8 h-16 rounded-full flex items-center justify-center transition-all duration-300 z-50 focus:outline-none focus:ring-0"
           >
@@ -296,6 +297,7 @@ export default function HomeSidebar() {
       <div className="md:hidden">
         {/* Floating Action Button */}
         <button
+          aria-label="Otvori navigaciju"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
           className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-cyan-600 to-blue-600 flex items-center justify-center text-white shadow-[0_0_20px_rgba(34,211,238,0.5)] transition-transform duration-300 ${isMobileOpen ? "scale-0" : "scale-100"}`}
         >
@@ -324,6 +326,7 @@ export default function HomeSidebar() {
         >
           {/* Odluka da ga gasimo sa "X" u istom uglu */}
           <button
+            aria-label="Zatvori navigaciju"
             onClick={() => setIsMobileOpen(false)}
             className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center text-gray-400 hover:text-white bg-white/5 rounded-full"
           >

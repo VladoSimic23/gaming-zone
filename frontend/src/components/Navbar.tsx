@@ -52,6 +52,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           href="/"
+          aria-label="Početna"
           className="flex items-center gap-3 group"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
@@ -94,6 +95,7 @@ export default function Navbar() {
               href="https://www.instagram.com/gg.grude/"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Instagram"
               className="text-gray-300 hover:text-fuchsia-500 transition-all duration-300 flex items-center group"
             >
               <svg
@@ -110,6 +112,7 @@ export default function Navbar() {
 
         {/* Mobile Menu Button - Hamburger */}
         <button
+          aria-label={isMobileMenuOpen ? "Zatvori izbornik" : "Otvori izbornik"}
           className="lg:hidden text-cyan-400 p-2 focus:outline-none"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >

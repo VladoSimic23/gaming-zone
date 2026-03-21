@@ -90,6 +90,7 @@ export default function HeroSlideshow({ data }: { data: HeroData | null }) {
             {data.images.map((_, idx) => (
               <button
                 key={idx}
+                aria-label={`Prikaži sliku ${idx + 1}`}
                 onClick={() => setCurrentIndex(idx)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   idx === currentIndex
