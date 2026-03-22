@@ -25,10 +25,11 @@ export default function Navbar() {
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
   ) => {
+    setIsMobileMenuOpen(false); // Zatvori menu nakon klika
+
     // Ako link vodi na hash unutar iste stranice (npr. #status), dodajemo smooth scroll
     if (href.startsWith("#")) {
       e.preventDefault();
-      setIsMobileMenuOpen(false);
       const element = document.querySelector(href);
       if (element) {
         // Dodajemo mali offset zbog fixed navbar-a
@@ -89,6 +90,29 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
+          {/* Phone Number */}
+          <li className="ml-4 border-l border-gray-700 pl-8">
+            <a
+              href="tel:063740656"
+              className="text-gray-300 hover:text-cyan-400 transition-all duration-300 flex items-center gap-2 group text-lg font-semibold tracking-wider"
+            >
+              <svg
+                className="w-5 h-5 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-all duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                />
+              </svg>
+              063-740-656
+            </a>
+          </li>
           {/* Instagram Icon */}
           <li className="ml-4 border-l border-gray-700 pl-8">
             <a
@@ -145,29 +169,57 @@ export default function Navbar() {
       {isMobileMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 right-0 bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-cyan-500/20 shadow-[0_10px_30px_rgba(0,0,0,0.8)] overflow-hidden">
           <ul
-            className="flex flex-col py-6"
+            className="flex flex-col items-center py-6 w-full"
             style={{ fontFamily: "var(--font-chakra, sans-serif)" }}
           >
             {navLinks.map((link) => (
               <li
                 key={link.name}
-                className="px-6 py-3 border-b border-gray-800/50 last:border-0 hover:bg-white/5 transition-colors"
+                className="w-full border-b border-gray-800/50 last:border-0 hover:bg-white/5 transition-colors"
               >
                 <Link
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link.href)}
-                  className="text-gray-300 text-xl uppercase tracking-wider font-semibold block w-full hover:text-cyan-400"
+                  className="text-gray-300 text-xl uppercase tracking-wider font-semibold block w-full text-center py-3 hover:text-cyan-400"
                 >
                   {link.name}
                 </Link>
               </li>
             ))}
-            <li className="px-6 py-4 hover:bg-white/5 transition-colors flex justify-left mt-2">
+
+            {/* Mobile Phone Number */}
+            <li className="w-full border-b border-gray-800/50 hover:bg-white/5 transition-colors">
+              <a
+                href="tel:063740656"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-3 text-gray-300 text-xl font-semibold hover:text-cyan-400 transition-colors py-4 w-full"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
+                </svg>
+                063-740-656
+              </a>
+            </li>
+
+            {/* Mobile Instagram */}
+            <li className="w-full hover:bg-white/5 transition-colors mt-2">
               <a
                 href="https://www.instagram.com/gg.grude/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-gray-300 text-xl font-semibold hover:text-fuchsia-500 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-3 text-gray-300 text-xl font-semibold hover:text-fuchsia-500 transition-colors py-4 w-full"
               >
                 <svg
                   className="w-8 h-8"

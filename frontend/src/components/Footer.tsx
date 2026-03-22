@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-black border-t border-purple-900/50 py-24  relative overflow-hidden">
+    <footer className="w-full bg-black border-t border-purple-900/50 py-12  relative overflow-hidden">
       {/* Cool glowing background effect */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-50 blur-[2px]"></div>
 

@@ -7,7 +7,7 @@ export default function NewsSection({ news }: { news: any[] }) {
   if (!news || news.length === 0) return null;
 
   return (
-    <div className="w-full relative py-24 bg-gradient-to-b from-[#050505] via-[#081229] to-[#050505] overflow-hidden ">
+    <div className="w-full relative py-12 md:py-16 bg-gradient-to-b from-[#050505] via-[#081229] to-[#050505] overflow-hidden ">
       {/* Cool background glowing effects */}
       <div className="absolute top-0 left-1/4 w-[30rem] h-[30rem] bg-cyan-600/10 rounded-full filter blur-[120px] opacity-60 pointer-events-none"></div>
       <div className="absolute bottom-0 right-1/4 w-[30rem] h-[30rem] bg-purple-600/10 rounded-full filter blur-[120px] opacity-60 pointer-events-none"></div>

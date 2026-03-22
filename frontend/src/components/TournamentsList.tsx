@@ -10,7 +10,7 @@ export default function TournamentsList({
 }) {
   if (!tournaments || tournaments.length === 0) {
     return (
-      <div className="w-full relative py-24 bg-gradient-to-b from-[#050505] via-[#1a0808] to-[#050505] overflow-hidden ">
+      <div className="w-full relative py-12 md:py-16 bg-gradient-to-b from-[#050505] via-[#1a0808] to-[#050505] overflow-hidden ">
         <div className="max-w-6xl mx-auto px-4 md:px-8 relative z-10">
           <div className="bg-[#1a1a1a]/80 backdrop-blur-sm border border-red-900/30 rounded-2xl p-12 text-center shadow-[0_0_30px_rgba(0,0,0,0.8)]">
             <h2
@@ -32,7 +32,7 @@ export default function TournamentsList({
   }
 
   return (
-    <div className="w-full relative py-24 bg-gradient-to-b from-[#050505] via-[#1a0808] to-[#050505] overflow-hidden drop-shadow-xl ">
+    <div className="w-full relative py-12 md:py-16 bg-gradient-to-b from-[#050505] via-[#1a0808] to-[#050505] overflow-hidden drop-shadow-xl ">
       {/* Background glow effects for Tournaments - Red/Orange aesthetic */}
       <div className="absolute top-0 right-1/4 w-[30rem] h-[30rem] bg-red-600/10 rounded-full filter blur-[120px] opacity-60 pointer-events-none"></div>
       <div className="absolute bottom-0 left-1/4 w-[30rem] h-[30rem] bg-orange-600/10 rounded-full filter blur-[120px] opacity-40 pointer-events-none"></div>
