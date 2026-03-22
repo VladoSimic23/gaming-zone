@@ -33,6 +33,16 @@ export const metadata: Metadata = {
     "igraona",
     "gaming igraonica",
     "esport",
+    "gaming turniri",
+    "gaming zone grude",
+    "Rezervacija PC-a u igraonici",
+    "Rezervacija PC-a u igraonici grude",
+    "Proslava rođendana u igraonici",
+    "Proslava rođendana u igraonici grude",
+    "Gaming turniri s nagradama",
+    "Gdje igrati igrice u grudama",
+    "gaming računalna igraonica",
+    "ggZone turniri",
     "PC igraonica",
     "PlayStation 5 igraonica",
     "gaming turniri",
@@ -58,6 +68,13 @@ export const metadata: Metadata = {
     "street fighter",
     "tekken",
     "smash bros",
+    "Gaming igraonica zapadna hercegovina",
+    "Gaming igraonica hercegovina",
+    "PC igraonica Posušje",
+    "Esport centar Široki Brijeg",
+    "Gdje igrati PS5 u Hercegovini",
+    "Roblox igraonica",
+    "Mjesto za druženje mladih Grude",
   ],
   authors: [{ name: "ggZone" }],
   creator: "ggZone",
@@ -104,11 +121,48 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "ggZone Gaming Center",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Ulica dr. Franje Tuđmana 8B",
+      addressLocality: "Grude",
+      addressCountry: "BA",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: "43.37160696800801",
+      longitude: "17.4157977",
+    },
+    url: "https://gggamingzone.com",
+    telephone: "+38763740656",
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "12:00",
+        closes: "23:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Saturday", "Sunday"],
+        opens: "16:00",
+        closes: "23:00",
+      },
+    ],
+  };
+
   return (
     <html lang="hr">
       <body
         className={`${chakraPetch.variable} ${orbitron.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />
