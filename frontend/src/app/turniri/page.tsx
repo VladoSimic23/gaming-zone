@@ -15,10 +15,12 @@ export const metadata: Metadata = {
 
 export default async function TurniriPage() {
   const tournaments = await client.fetch(
-    `*[_type == "tournament"] | order(_createdAt desc)`,
+    `*[_type == "tournament"] | order(startDate desc)`,
     {},
     { next: { revalidate: 30 } },
   );
+
+  const now = new Date();
 
   return (
     <main className="min-h-screen bg-[#111] text-white font-sans py-24 px-4 md:px-8 mt-12">
@@ -77,6 +79,16 @@ export default async function TurniriPage() {
                   {/* Overlay gradijent i tekst */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
 
+                  {tournament.startDate &&
+                    new Date(tournament.startDate) < now && (
+                      <div
+                        className="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded z-10 shadow-lg uppercase tracking-wider"
+                        style={{ fontFamily: "var(--font-chakra, sans-serif)" }}
+                      >
+                        Završeno
+                      </div>
+                    )}
+
                   <div className="absolute bottom-0 left-0 w-full p-6">
                     {tournament.startDate && (
                       <div
@@ -89,6 +101,7 @@ export default async function TurniriPage() {
                         {new Date(tournament.startDate).toLocaleDateString(
                           "hr-HR",
                           {
+                            timeZone: "Europe/Zagreb",
                             day: "2-digit",
                             month: "2-digit",
                             year: "numeric",

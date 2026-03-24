@@ -63,8 +63,8 @@ export default function WorkingHours({ data }: { data: any }) {
                 ) : (
                   <div className="flex items-center gap-2 text-green-400 font-bold px-3 py-1 bg-green-500/10 rounded-lg text-sm border border-green-500/20 tracking-widest">
                     <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                    {dayData?.openTime || "--:--"} -{" "}
-                    {dayData?.closeTime || "--:--"}
+                    {dayData?.openTime ? `${dayData.openTime}h` : "--:--"} -{" "}
+                    {dayData?.closeTime ? `${dayData.closeTime}h` : "--:--"}
                   </div>
                 )}
               </div>

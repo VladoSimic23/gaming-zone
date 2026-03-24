@@ -36,7 +36,7 @@ export default async function Home() {
 
   // Dohvaća turnire (zadnja 3 objavljena)
   const tournamentsData = await client.fetch(
-    `*[_type == "tournament"] | order(_createdAt desc)[0...3]`,
+    `*[_type == "tournament"] | order(startDate desc)[0...3]`,
     {},
     { next: { revalidate: 30 } },
   );

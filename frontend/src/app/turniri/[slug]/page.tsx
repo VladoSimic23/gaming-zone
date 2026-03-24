@@ -206,20 +206,31 @@ export default async function TournamentDetailPage({
             ← Svi turniri
           </Link>
           {tournament.startDate && (
-            <div
-              className="text-red-400 text-sm md:text-base font-semibold mb-3 bg-red-500/20 inline-block px-3 py-1 rounded-md border border-red-500/30 backdrop-blur-sm"
-              style={{
-                fontFamily: "var(--font-chakra, sans-serif)",
-                textShadow: "0 2px 4px rgba(0,0,0,0.8)",
-              }}
-            >
-              {new Date(tournament.startDate).toLocaleDateString("hr-HR", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
+            <div className="flex gap-3 mb-3">
+              <div
+                className="text-red-400 text-sm md:text-base font-semibold bg-red-500/20 inline-block px-3 py-1 rounded-md border border-red-500/30 backdrop-blur-sm"
+                style={{
+                  fontFamily: "var(--font-chakra, sans-serif)",
+                  textShadow: "0 2px 4px rgba(0,0,0,0.8)",
+                }}
+              >
+                {new Date(tournament.startDate).toLocaleDateString("hr-HR", {
+                  timeZone: "Europe/Zagreb",
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </div>
+              {new Date(tournament.startDate) < new Date() && (
+                <div
+                  className="bg-red-600 text-white text-sm md:text-base font-bold px-3 py-1 rounded-md shadow-lg uppercase tracking-wider flex items-center"
+                  style={{ fontFamily: "var(--font-chakra, sans-serif)" }}
+                >
+                  Završeno
+                </div>
+              )}
             </div>
           )}
           <h1

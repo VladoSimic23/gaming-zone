@@ -31,6 +31,8 @@ export default function TournamentsList({
     );
   }
 
+  const now = new Date();
+
   return (
     <div className="w-full relative py-12 md:py-16 bg-gradient-to-b from-[#050505] via-[#1a0808] to-[#050505] overflow-hidden drop-shadow-xl ">
       {/* Background glow effects for Tournaments - Red/Orange aesthetic */}
@@ -98,6 +100,15 @@ export default function TournamentsList({
                   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d0d] via-transparent to-transparent opacity-100"></div>
+                {tournament.startDate &&
+                  new Date(tournament.startDate) < now && (
+                    <div
+                      className="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded z-20 shadow-lg uppercase tracking-wider"
+                      style={{ fontFamily: "var(--font-chakra, sans-serif)" }}
+                    >
+                      Završeno
+                    </div>
+                  )}
               </div>
 
               <div className="relative z-10 flex flex-col flex-grow px-6 pb-6 pt-2 justify-between">
@@ -110,6 +121,7 @@ export default function TournamentsList({
                       {new Date(tournament.startDate).toLocaleDateString(
                         "hr-HR",
                         {
+                          timeZone: "Europe/Zagreb",
                           day: "2-digit",
                           month: "2-digit",
                           year: "numeric",
