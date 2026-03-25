@@ -129,6 +129,24 @@ export default function ReservationForm() {
     setMessage("");
 
     try {
+      // 1. Šaljemo podatke na naš Next.js API route (/api/reserve) da se spremi u Sanity s defaultnim statusom na čekanju
+      const res = await fetch("/api/reserve", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          date,
+          times: selectedTimes,
+          seats,
+          name,
+          phone,
+        }),
+      });
+
+      if (!res.ok) {
+        console.error("Greška pri kreiranju rezervacije u Sanity-u");
+      }
+
+      // 2. Preusmjeravamo korisnika na WhatsApp
       const formattedDate = new Date(date).toLocaleDateString("hr-HR");
       const timeString = selectedTimes.sort().join(", ");
 
@@ -337,13 +355,27 @@ export default function ReservationForm() {
               </p>
             </div>
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 rounded-lg transition-colors"
-            >
-              {isSubmitting ? "Spremanje..." : "Potvrdi rezervaciju"}
-            </button>
+            <div className="flex flex-col gap-3">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 rounded-lg transition-colors"
+              >
+                {isSubmitting ? "Spremanje..." : "Potvrdi rezervaciju"}
+              </button>
+
+              <div className="text-center bg-red-950/30 border border-red-500/20 rounded-lg p-3">
+                <p className="text-xs text-red-400 font-medium">
+                  <span className="font-bold uppercase tracking-wider">
+                    ⚠️ Važna napomena:
+                  </span>
+                  <br />
+                  Nakon klika na gumb bit ćete preusmjereni na WhatsApp. Ukoliko
+                  ne pošaljete WhatsApp poruku vlasniku, vaša rezervacija{" "}
+                  <strong>neće biti uvažena</strong>.
+                </p>
+              </div>
+            </div>
           </>
         )}
       </form>
