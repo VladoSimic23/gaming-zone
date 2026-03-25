@@ -19,7 +19,13 @@ interface ReservationDoc {
 }
 
 export default function ReservationForm() {
-  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
+  const getTomorrowDateString = () => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return tomorrow.toISOString().split("T")[0];
+  };
+
+  const [date, setDate] = useState(getTomorrowDateString());
   const [selectedTimes, setSelectedTimes] = useState<string[]>([]);
   const [seats, setSeats] = useState(1);
   const [name, setName] = useState("");
@@ -123,36 +129,34 @@ export default function ReservationForm() {
     setMessage("");
 
     try {
-      // Šaljemo podatke na naš Next.js API route (/api/reserve)
-      const res = await fetch("/api/reserve", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        // Šaljemo "times" umjesto "time"
-        body: JSON.stringify({
-          date,
-          times: selectedTimes,
-          seats,
-          name,
-          phone,
-        }),
-      });
+      const formattedDate = new Date(date).toLocaleDateString("hr-HR");
+      const timeString = selectedTimes.sort().join(", ");
 
-      const data = await res.json();
+      const whatsappMessage = `Pozdrav, želim napraviti rezervaciju:%0A%0A*Ime:* ${name}%0A*Broj mobitela:* ${phone}%0A*Datum:* ${formattedDate}%0A*Vrijeme:* ${timeString}%0A*Broj računala / konzola:* ${seats}%0A%0AJe li slobodno?`;
 
-      if (res.ok) {
-        setMessage("Uspješno! Vaša rezervacija je zabilježena.");
-        setDate(new Date().toISOString().split("T")[0]);
+      // Otvori WhatsApp
+      window.open(
+        `https://wa.me/38763740656?text=${whatsappMessage}`,
+        "_blank",
+      );
+
+      setMessage("Preusmjeravanje na WhatsApp...");
+
+      // Resetiraj formu
+      setTimeout(() => {
+        setDate(getTomorrowDateString());
         setSelectedTimes([]);
         setSeats(1);
         setName("");
         setPhone("");
         setAvailableSlots([]);
-      } else {
-        setMessage(`Greška: ${data.message || "Pokušajte ponovno."}`);
-      }
+        setIsSubmitting(false);
+        setMessage("");
+      }, 3000);
     } catch (err) {
-      setMessage("Došlo je do mrežne greške. Pokušajte ponovno kasnije.");
-    } finally {
+      setMessage(
+        "Došlo je do greške. Pokušajte ručno poslati poruku na 063-740-656.",
+      );
       setIsSubmitting(false);
     }
   };
@@ -213,7 +217,7 @@ export default function ReservationForm() {
             id="reservationDate"
             type="date"
             required
-            min={new Date().toISOString().split("T")[0]}
+            min={getTomorrowDateString()}
             value={date}
             onChange={(e) => setDate(e.target.value)}
             className="w-full bg-[#222] border border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-purple-500 outline-none"

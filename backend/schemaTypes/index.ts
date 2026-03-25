@@ -6,6 +6,7 @@ import tournament from './tournament'
 import workingHours from './workingHours'
 import prices from './prices'
 import news from './news'
+import liveStatus from './liveStatus'
 
 export const schemaTypes = [
   reservation,
@@ -16,4 +17,5 @@ export const schemaTypes = [
   workingHours,
   prices,
   news,
+  liveStatus,
 ]

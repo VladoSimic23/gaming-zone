@@ -72,7 +72,7 @@ export default function TournamentsList({
           {tournaments.slice(0, 3).map((tournament, index) => (
             <Link
               key={tournament._id}
-              href={`/turniri/${tournament.slug.current}`}
+              href={`/turniri/${tournament?.slug?.current}`}
               className="group block relative rounded-2xl overflow-hidden bg-[#0d0d0d] shadow-lg hover:shadow-[0_0_30px_rgba(239,68,68,0.2)] transition-all duration-500 hover:-translate-y-2 flex-shrink-0 w-[85vw] md:w-auto flex flex-col h-[420px] border border-white/5 hover:border-red-500/40 snap-center"
             >
               {/* Oznaka rednog broja (Cool broj) */}
