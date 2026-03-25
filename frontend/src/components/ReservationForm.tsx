@@ -252,6 +252,10 @@ export default function ReservationForm() {
                 const isFull = slot.availableSeats === 0;
                 const isSelected = selectedTimes.includes(slot.time);
 
+                // Pretvara "13:00" u "13 do 14h"
+                const hour = parseInt(slot.time.split(":")[0]);
+                const displayTime = `${hour} do ${hour + 1}h`;
+
                 return (
                   <button
                     type="button"
@@ -259,19 +263,21 @@ export default function ReservationForm() {
                     disabled={isFull && !isSelected}
                     onClick={() => toggleTime(slot.time, slot.availableSeats)}
                     className={`
-                        p-2 rounded-lg text-sm font-medium transition-colors border
+                        p-2 rounded-lg text-sm font-medium transition-colors border flex flex-col items-center justify-center gap-1
                         ${
                           isFull
-                            ? "opacity-30 cursor-not-allowed bg-red-900 border-red-800"
+                            ? "opacity-40 cursor-not-allowed bg-red-950/40 border-red-900"
                             : isSelected
-                              ? "bg-purple-600 border-purple-500 text-white"
-                              : "bg-[#222] border-gray-700 hover:bg-[#333] text-gray-200"
+                              ? "bg-purple-600 border-purple-400 text-white shadow-[0_0_15px_rgba(168,85,247,0.5)] scale-105"
+                              : "bg-[#222] border-gray-700 hover:bg-[#333] hover:border-gray-500 text-gray-200"
                         }
                       `}
                   >
-                    {slot.time}
-                    <span className="block text-xs opacity-75">
-                      {isFull ? "Puno" : `${slot.availableSeats} sl.`}
+                    <span className="font-bold">{displayTime}</span>
+                    <span
+                      className={`block text-xs px-2 py-0.5 rounded-full ${isFull ? "bg-red-900 text-red-200" : isSelected ? "bg-purple-800 text-purple-100" : "bg-green-900/50 text-green-400 border border-green-800/50"}`}
+                    >
+                      {isFull ? "Popunjeno" : `${slot.availableSeats} slobodno`}
                     </span>
                   </button>
                 );
