@@ -8,12 +8,14 @@ const orbitron = Orbitron({
   variable: "--font-orbitron",
   subsets: ["latin"],
   weight: ["400", "500", "700", "900"],
+  display: "swap",
 });
 
 const chakraPetch = Chakra_Petch({
   variable: "--font-chakra",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const viewport: Viewport = {

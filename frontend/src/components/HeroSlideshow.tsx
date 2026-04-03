@@ -62,6 +62,7 @@ export default function HeroSlideshow({ data }: { data: HeroData | null }) {
             width={1920}
             height={1080}
             priority={index === 0}
+            fetchPriority={index === 0 ? "high" : "auto"}
             className="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-[10000ms]"
           />
         </div>
